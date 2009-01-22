@@ -1,0 +1,87 @@
+<script type="text/javascript">
+    var friends_list = [<%= @friends.map { |friend| "'"+friend.account.name+"'"  }.join(',') %>]
+    friends_list.push('<%= @current_user.name %>')
+    var sponsors_list = [<%= @friends.map { |friend| "'"+friend.account.name+"'"  }.join(',') %>]
+    sponsors_list.push('<%= @current_user.name %>')
+    var account_mapper = {<%= @friends.map { |friend| "'"+friend.account.name+"' : " +friend.account.id.to_s }.join(',') %>};
+    account_mapper['<%= @current_user.name %>'] = <%= @current_user.id %>;
+    
+    var spongers = new Array()
+    var sponsor = new Object()
+    
+    document.addEvent('domready', function() {
+	// Our instance for the element with id "demo-local"
+	spongers_autocompleter = new Autocompleter.Local('spongers', friends_list, {
+		'minLength': 1, // We wait for at least one character
+		'multiple': true, // Overflow for more entries
+		'delay' : 0,
+		'selectMode': 'type-ahead',
+                'list' : 'spongers_box',
+                'container' : spongers
+	});
+        sponsor_autocompleter = new Autocompleter.Local('sponsor', sponsors_list, {
+		'minLength': 1, // We wait for at least one character
+		'multiple': false, // Overflow for more entries
+		'delay' : 0,
+		'selectMode': 'type-ahead',
+                'list' : 'sponsor_box',
+                'container' : sponsor
+	});
+        
+        sponsor_autocompleter.addListItem('<%= @current_user.name %>')
+})
+function map_spongers(){
+    return spongers.map(function(sponger){
+        return account_mapper[sponger]
+    })
+}
+function process_add_form(form){
+    var spongers = $$('.spongers').map(function(child){
+        return account_mapper[child.title]
+    })
+    var sponsor = $$('.sponsor')
+    if(sponsor.length>0 && spongers.length>0){
+        sponsor = account_mapper[sponsor[0].title]
+        form.sponsor[0].value = sponsor
+        form.spongers[0].value = spongers
+        return true;
+    }
+    return false;
+}
+</script>
+<h1>zaqpki</h1>
+<p>Witaj kuźwa <%= @current_user.name %></p>
+<table width="100%">
+  <tr>
+    <td valign="top">
+      <h2> Dodawarka </h2>
+      <form method="POST" action="deals/add" onsubmit="return process_add_form(this)">
+        <input type="hidden" name="sponsor" id="ss"/>
+        <input type="hidden" name="spongers"/>
+        Co: <input type="text" name="description"/><br/>
+        Za ile: <input type="text" name="cost"/><br/>
+        Kto: <span id="sponsor_box"><input type="text" id="sponsor"/></span><br/>
+        Komu: <span id="spongers_box"><input type="text" id="spongers"/></span><br/> 
+        <input type="submit" value="dodaj"/>
+      </form>
+      <h2>Feeds</h2>
+      <% @feeds.each do |feed| -%>
+            <% deal = feed.deal; quantity = deal.spongers.count; -%>
+            <%= "#{deal.sponsor.name} kupuje #{deal.description} za #{deal.cost} zł dla: #{deal.spongers.map{ |s| s.name}.join', '} -" %>
+            <%= link_to 'wyjeb', :controller => 'deals', :action => 'remove', :id => deal.id%>
+        <br />
+      <% end -%>
+    </td>
+    <td valign="top">
+      <h2>Friends</h2>
+      <% @friends.each do |friend| -%>
+        <%= "#{friend.account.name}: #{friend.saldo}" %><br />
+      <% end -%>
+      Twoje saldo: <%= @current_user.saldo %> <br/>
+      <form action="friends/add">
+        email: <input type="text" name="email"/>
+        <input type="submit" value="dodaj"/>
+      </form>
+    </td>
+  </tr>
+</table>

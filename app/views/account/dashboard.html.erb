@@ -1,0 +1,76 @@
+<%= stylesheet_link_tag 'autocompleter', 'modalbox'  %>
+<%= javascript_include_tag :all %>
+    <script type="text/javascript">
+      function log(data){
+        $('log').innerHTML += data + "<br/>"
+      } 
+    
+    var friends_list = [<%= @friends.map { |friend| "'"+friend.account.name+"'"  }.join(',') %>]
+    var current_user = {
+      name : '<%= @current_user.name %>',
+      id : <%= @current_user.id %>
+    }
+    friends_list.push(current_user.name)
+    var sponsor,spongers
+    
+      Event.observe(window, 'load', function() {
+        window.sponsor = new Autocompleter('sponsor', friends_list)
+        window.sponsor.push(current_user.name)
+        window.spongers = new Autocompleter('spongers', friends_list, {multiple: true})
+        <%@defualt_spongers and @defualt_spongers.each do |sponger| %>
+        window.spongers.push('<%= sponger.name %>')
+        <% end %>
+      })
+  var account_mapper = {<%= @friends.map { |friend| "'"+friend.account.name+"' : " +friend.account.id.to_s }.join(',') %>};
+  account_mapper['<%= @current_user.name %>'] = <%= @current_user.id %>;
+
+</script>
+<%= render :partial => 'new_deal'  %>
+<div id="dashboard">
+  <table width="100%">
+    <tr>
+      <td valign="top">
+        <div id="feeds">
+          <table width="100%">
+            <tr><td valign="center" width="32px">
+              <%= image_tag "icons/cart_add.png" %>
+            </td><td align="left"><h2>
+              <a href="javascript:show_new_deal()" style="color:green">Dodaj zaqpek</a>
+            </h2>
+            </td></tr>
+          </table>
+          <% @feeds.each do |feed| -%>
+            <div style="padding-top: 5px; padding-bottom: 5px; border-top: 1px solid gray" onmouseover="this.style.backgroundColor = '#FFFFBE'" onmouseout="this.style.backgroundColor = ''">
+              <%= render :partial => feed.type.to_s.underscore , :locals => {:feed => feed} %>
+            </div>
+          <% end -%>
+          <div style="text-align:center;">
+            <% @total_pages.times do |i| %>
+              <% i += 1 %>
+            <span style='font-weight:bold;font-size:15px;'><%= i != @page ? link_to(i.to_s, '/page/'+i.to_s, :style => "text-decoration: underline;") : i.to_s %></span>
+            <% end %>
+          </div>
+        </div>
+        <%= render :partial => 'new_friend' %>
+      </td>
+      <td valign="top" width="200px" style="padding-left: 10px">
+      <h2>Moi znajomi</h2>
+        <table width="100%">
+          <% @friends << @current_user
+          @friends.sort! do |friend1, friend2|
+            friend1.saldo <=> friend2.saldo
+          end
+          @friends.each do |friend| -%>
+            <tr>
+              <td width="20px" style="font-size:20px;"><%= image_tag 'icons/card_address.png' %></td>
+              <td style="font-size:20px;"><%= "#{friend == @current_user ? friend.name : friend.account.name}" %></td>
+              <td align="right" style="font-size:20px;"><%= friend.saldo.round(2) %> zł</td>
+            </tr>
+          <% end -%>
+        </table>
+        <%= link_to "#{image_tag 'icons/plus.png'} Dodaj", 'javascript:show_new_friend()', :id => 'show_new_friend_link' %>
+        <%= link_to "#{image_tag 'icons/newspaper.png'} Wróć", 'javascript:hide_new_friend()', :id => 'hide_new_friend_link', :style => 'display:none;' %>
+      </td>
+    </tr>
+  </table>
+</div>

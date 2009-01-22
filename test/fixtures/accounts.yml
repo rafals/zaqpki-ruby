@@ -1,0 +1,32 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  name: jedzej
+  email: jedzej@gmail.com
+  password: j
+
+two:
+  id: 2
+  name: rav
+  email: ravsobota@gmail.com
+  password: r
+
+three:
+  id: 3
+  name: kraxi
+  email: m.krakowiak@gmail.com
+  password: k
+
+four:
+  id: 4
+  name: martyna
+  email: mantalynka@gmail.com
+  password: m
+
+five:
+  id: 5
+  name: jercik
+  email: jercik@gmail.com
+  password: u
+

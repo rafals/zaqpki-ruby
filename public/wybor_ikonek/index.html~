@@ -1,0 +1,109 @@
+<html>
+<head>
+<script type="text/javascript" src="/javascipts/prototype.js"></script>
+<style type="text/css">
+
+#icon_box {
+  background-color:#BBBBBB;
+  position:absolute;
+  left:100px;
+  top:100px;
+  display:inline;
+}
+
+.icon {
+  background-color: #FFFFFF;
+}
+
+.icon img {
+  width:25px;
+  height:25px;
+}
+
+</style>
+<script type="text/javascript">
+var Observator = Class.create({
+  initialize: function(selector, callbacks){
+    $$(selector).each(function(element){
+      for(event_name in callbacks){
+        Event.observe(element, event_name, callbacks[event_name])
+      }
+    })
+  }
+})
+
+var IconBox = Class.create({
+  initialize: function(box_id, chosen_id, imageslist){
+    this.box = $(box_id)
+    this.list = imageslist
+    this.chosen = $(chosen_id)
+    this.build()
+  },
+  
+  build: function(){
+    var buffer = "<table cellpadding='0'>"
+    this.list.each(function(item, index){
+      if(index % 10 == 0) buffer += "<tr>";
+      buffer += "<td><div class='icon' id='icon"+index+"'><img src='" + item + "'/></div></td>";
+      if((index + 1)% 10 == 0) buffer += "</tr>\n";
+    })
+    if(this.list.length % 10 != 0) buffer += "</tr>"
+    buffer += "</table>"
+    this.box.innerHTML = buffer;
+    this.chosen.absolutize();
+    this.box.setStyle({
+      left: (this.chosen.offsetLeft + this.chosen.offsetWidth) + 'px',
+      top: this.chosen.offsetTop + 'px'
+    });
+    this.chosen.relativize();
+    var context = this
+    new Observator('#'+this.chosen.id, {
+      click : function(event){
+        context.box.style.display == 'none' ? context.show() : context.hide()
+      }
+    })
+    new Observator('.icon', {
+      mouseover : function(event){
+        event.target.setStyle({backgroundColor : '#FFFF9A'})
+      },
+      mouseout : function(event){
+        event.target.setStyle({backgroundColor : '#FFFFFF'})
+      },
+      click : function(event){
+        context.choose(event)
+      }
+    })
+  },
+  
+  show: function(){
+    this.box.setStyle({display:'inline'})
+  },
+  
+  hide: function(){
+    this.box.setStyle({display:'none'})
+  },
+  
+  choose: function(event){
+    this.hide()
+    this.chosen.src = event.currentTarget.down().src
+  }
+})
+
+
+
+Event.observe(window, "load", function(){
+  var icons = new Array()
+  for(var i = 1; i <= 100; i++){
+    icons.push('images/icons/' + i + '.gif')
+  }
+  new IconBox("icon_box", "chosen_icon", icons)
+})
+</script>
+</head>
+<body>
+<table>
+<tr><td>sadddsssssssssssssssssssss<br/><br/></td><td></td></tr>
+<tr><td></td><td><img id="chosen_icon" src="images/icons/1.gif"/></td></tr>
+<div id="icon_box"></div>
+</body>
+</html>

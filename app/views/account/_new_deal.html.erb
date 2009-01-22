@@ -1,0 +1,20 @@
+<div id="new_deal" style="display:none;">
+  <form method="POST" action="/deals/add" onsubmit="return process_add_form(this)">
+        <input type="hidden" name="sponsor_id"/>
+        <input type="hidden" name="spongers_ids"/>
+        <input name="description" id="description" class="text_field huge" style="width:250px;font-size:30px;" type="text" value="Nowy zaqpek"/>
+        <span class="zaqp" style="margin: 30px 10px 3px 10px; display: inline;">za</span>
+        <input name="cost" class="text_field huge" style="width:75px;font-size:30px;display:inline;" type="text">
+        <span class="zaqp" style="margin: 30px 10px 3px 10px; display: inline;">zł</span><br/><br/>
+        <span>
+          <span style="margin: 30px 10px 3px 10px; display: inline;">kto</span>
+          <input type="text" id="sponsor"/>
+        </span>
+        <span>
+          <span style="margin: 30px 10px 3px 10px; display: inline;">komu</span>
+          <input type="text" id="spongers"/>
+        </span><br />  
+    <input value="Dodaj" style="margin-top: 10px" class="big_button" class="text_field huge" type="submit"/>
+  </form>
+  <input value="Wróć" class="big_button" class="text_field huge" style="background-color:#BBBBBB;" type="submit" onclick="hide_new_deal()"/>
+</div>
