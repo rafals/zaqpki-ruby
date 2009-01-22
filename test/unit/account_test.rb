@@ -162,6 +162,4 @@ class AccountTest < ActiveSupport::TestCase
     assert_equal 'SponsoredFeed', @r.feeds[feeds].type
   end
   
-  #todo rejestracja, logowanie, wysyłanie zaproszeń emailem
-  
 end
