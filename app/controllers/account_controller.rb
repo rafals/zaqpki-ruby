@@ -15,3 +15,4 @@ class AccountController < ApplicationController
   end
   
 end
+ 
