@@ -1,3 +1,6 @@
-- rejestracja
-- logowanie
-- wysyłanie zaproszeń emailem
+- intro index
+  - panel logowania
+  - rejestrowanie emaila
+    - wysłanie emaila z tokenem
+- weryfikacja emaila z tokenem
+- finalizacja rejestracji -> dashboard
