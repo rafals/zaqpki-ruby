@@ -2,7 +2,7 @@
 git add -A
 if [ -z "$1" ]; then
 echo "1"
-git commit -a -m "`git status | grep modified`"
+git commit -a -m "`git status | grep modified | less`"
 else
 echo "2"
 git commit -a -m "$1"
