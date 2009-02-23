@@ -18,7 +18,7 @@ development:
   adapter: mysql
   encoding: utf8
 #  socket: /var/run/mysqld/mysqld.sock
-  database: zaqpq2_development
+  database: zaqpki_development
   username: root
   password: kozamafioza
   host: localhost
@@ -30,7 +30,7 @@ test:
   adapter: mysql
   encoding: utf8
 #  socket: /var/run/mysqld/mysqld.sock
-  database: zaqpq2_test
+  database: zaqpki_test
   username: root
   password: kozamafioza
   host: localhost
@@ -39,7 +39,7 @@ production:
   adapter: mysql
   encoding: utf8
 #  socket: /var/run/mysqld/mysqld.sock
-  database: zaqpq2_production
+  database: zaqpki_production
   username: root
   password: kozamafioza
   host: localhost

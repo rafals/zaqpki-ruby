@@ -70,7 +70,7 @@ class AccountController < ApplicationController
     end
     account = Account.new :email => session[:verified_email], :password => params[:password], :name => params[:name]
     if account.save
-      session[:current_user] = user.id
+      session[:current_user] = account.id
       Activation.find_by_email(session[:verified_email]).destroy
       flash[:notice] = "Konto stworzono"
       redirect_to :action => 'dashboard'

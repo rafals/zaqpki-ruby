@@ -1,6 +1,7 @@
-- intro index
-  - panel logowania
-  - rejestrowanie emaila
-    - wysłanie emaila z tokenem
-- weryfikacja emaila z tokenem
-- finalizacja rejestracji -> dashboard
+Do końca 2. iteracji:
+- nie wyświetlać 'nie zalogowano' na powitanie
+- intro
+- ogarnięcie wyglądu
+- zaproszenia wewnątrzzaqpkowe
+... bonusy:
+- wysyłanie zaproszeń emailem
