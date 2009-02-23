@@ -4,12 +4,17 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   layout 'oldschool'
+  
   def current_user
-    @current_user
+    return nil unless session[:current_user]
+    @current_user ||= Account.find session[:current_user]
   end
-
-  def login
-    @current_user = Account.find 2
+  
+  def login_required
+    unless current_user
+      flash[:error] = "Nie zalogowano!"
+      redirect_to :controller => 'intro', :action => 'index'
+    end
   end
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store

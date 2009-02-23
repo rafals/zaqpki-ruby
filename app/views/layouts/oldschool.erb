@@ -11,16 +11,19 @@
       <div id="header">
         <a href="http://zaqpki.unl.pl/"><img src="/images/zaqpki.png" id="logo"></a>
         <div id="nav">
-          <a>home</a> <a>dodaj zaqpek</a> <a>historia</a> <a>znajomi</a> 
-        </div>
-
-        <div id="content_tab">
-          <a style="font-size: 90%;" href="login.php">Log Out</a>
-          <img src="/images/content_tab_left_2.png" id="content_tab_left" alt="">
+          <% if @current_user %>
+            <a href="/logout">Logout</a>
+          <% end %>
         </div>
       </div>
       <div id="content_container">
         <div id="content" style="padding-top: 10px">
+          <% if flash[:error] %>
+            <div id="flash_error"><%= flash[:error] %></div>
+          <% end %>
+          <% if flash[:notice] %>
+            <div id="flash_notice"><%= flash[:notice] %></div>
+          <% end %>
           <%= yield %>
         </div>
         <div id="footer">
@@ -30,7 +33,6 @@
           <a>Developers</a>
           <a>Content Policy</a>
           <a>Terms of Service</a>
-          <a href="newtyp.php">Dodaj typa</a>
         </div>
       </div>
     </div>

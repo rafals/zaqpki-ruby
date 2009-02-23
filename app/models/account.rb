@@ -4,6 +4,7 @@ class Account < ActiveRecord::Base
   has_many :reported,  :class_name => "Deal", :foreign_key => "snitch_id"
   has_and_belongs_to_many :sponged, :class_name => "Deal"
   has_many :feeds
+  validates_uniqueness_of :email, :name
   
   def update_saldos me_new
     account = me_new.account
@@ -99,5 +100,9 @@ class Account < ActiveRecord::Base
   
   def buy description, cost, sponsor_id, spongers_ids
     report description, cost, spongers_ids, sponsor_id
+  end
+  
+  def self.authenticate email, password
+    Account.find_by_email_and_password email, password
   end
 end

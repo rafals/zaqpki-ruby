@@ -8,16 +8,17 @@ class CreateTransfers < ActiveRecord::Migration
 
       t.timestamps
     end
-    j = Account.create :name => 'jedzej', :email => 'jedzej@gmail.com'
-    r = Account.create :name => 'rav', :email => 'ravsobota@gmail.com'
-    k = Account.create :name => 'kraxi', :email => 'm.krakowiak@gmail.com'
-    m = Account.create :name => 'martyna', :email => 'mantalynka@gmail.com'
-    u = Account.create :name => 'jercik', :email => 'jercik@gmail.com'
     
-    r.connect j
-    r.connect m
-    r.connect k
-    r.connect u
+#    j = Account.create :name => 'jedzej', :email => 'jedzej@gmail.com'
+#    r = Account.create :name => 'rav', :email => 'ravsobota@gmail.com'
+#    k = Account.create :name => 'kraxi', :email => 'm.krakowiak@gmail.com'
+#    m = Account.create :name => 'martyna', :email => 'mantalynka@gmail.com'
+#    u = Account.create :name => 'jercik', :email => 'jercik@gmail.com'
+#    
+#    r.connect j
+#    r.connect m
+#    r.connect k
+#    r.connect u
     
   end
 

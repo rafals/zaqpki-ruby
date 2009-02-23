@@ -31,10 +31,15 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => 'intro', :action => 'index'
+  map.root :controller => 'account', :action => 'dashboard'
   map.connect 'page/:id', :controller => 'account', :action => 'dashboard'
+  map.connect 'intro', :controller => 'intro', :action => 'index'
   map.connect 'login', :controller => 'account', :action => 'login'
   map.connect 'signup', :controller => 'account', :action => 'signup'
+  map.connect 'join', :controller => 'account', :action => 'send_authentication_email'
+  map.connect 'verify/:token', :controller => 'account', :action => 'verify_authentication_token'
+  map.connect 'signup/finalize', :controller => 'account', :action => 'signup_finalize'
+  map.connect 'logout', :controller => 'account', :action => 'logout'
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
@@ -42,4 +47,7 @@ ActionController::Routing::Routes.draw do |map|
   # consider removing the them or commenting them out if you're using named routes and resources.
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
+  map.connect ':chuj', :controller => 'intro', :action => 'error404'
+  map.connect ':chuj/:zwis', :controller => 'intro', :action => 'error404'
+  map.connect ':chuj/:zwos/:pedal', :controller => 'intro', :action => 'error404'
 end
