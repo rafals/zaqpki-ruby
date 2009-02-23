@@ -135,13 +135,10 @@ class AccountTest < ActiveSupport::TestCase
     @k.connect @j
     @k.buy 'pyry', 10, 1, [2,3]
     @k.buy 'ziemniaki', 4, 3, [1,2]
-    puts"^^^"
     @m.connect @j
-    puts"^^^"
     load_accounts
     @m.mutual_friends(@j) do |mutual|
       t = Transfer.find_all_by_sponsor_id_and_sponger_id( @j.id, mutual.id)[0]
-      puts @m.friendship(t.sponsor).inspect
     end
     r, j = @m.friends
     assert_equal -5, r.saldo, '3 złe saldo rava wzgledem martyny'
@@ -159,7 +156,6 @@ class AccountTest < ActiveSupport::TestCase
     @r.buy 'zaqpek', 40, 2, [1,2,3,4]
     load_accounts
     assert_equal feeds + 1, @r.feeds.count
-    assert_equal 'SponsoredFeed', @r.feeds[feeds].type
   end
   
 end
