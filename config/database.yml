@@ -20,7 +20,7 @@ development:
 #  socket: /var/run/mysqld/mysqld.sock
   database: zaqpq2_development
   username: root
-  password: 
+  password: kozamafioza
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -32,7 +32,7 @@ test:
 #  socket: /var/run/mysqld/mysqld.sock
   database: zaqpq2_test
   username: root
-  password: 
+  password: kozamafioza
   host: localhost
 
 production:
@@ -41,5 +41,5 @@ production:
 #  socket: /var/run/mysqld/mysqld.sock
   database: zaqpq2_production
   username: root
-  password: 
+  password: kozamafioza
   host: localhost
