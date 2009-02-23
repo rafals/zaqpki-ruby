@@ -1,4 +1,5 @@
 #!/bin/sh
+git add -A
 if [ -z "$1" ]; then
 echo "1"
 git commit -a -m "`git status | grep modified`"
