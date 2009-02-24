@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   def login_required
     unless current_user
       flash[:error] = "Nie zalogowano!"
-      redirect_to :controller => 'intro', :action => 'index'
+      redirect_to '/'
     end
   end
   # See ActionController::RequestForgeryProtection for details

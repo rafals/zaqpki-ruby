@@ -1,1 +1,5 @@
-<a href="<%= "http://#{@host}/verify/#{@token}" %>">Aktywacja</a>
+<html>
+  <body>
+    <%= link_to 'aktywacja', 'http://' + @host + verify_path(:token => @token) %>
+  </body>
+</html>
