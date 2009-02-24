@@ -1,4 +1,6 @@
 class DealsController < ApplicationController
+  before_filter :login_required
+  
   def add
     current_user.report params[:description], params[:cost], params[:spongers_ids].split(','), params[:sponsor_id]#.split(',')
     flash[:notice] = "Zaqpiono " + params[:description]
