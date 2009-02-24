@@ -38,6 +38,8 @@ ActionController::Routing::Routes.draw do |map|
   map.signup_details 'signup/details', :controller => 'signup', :action => 'details_form'
   map.verify 'signup/verify/:token', :controller => 'signup', :action => 'verify_authentication_token'
   map.logout 'logout', :controller => 'account', :action => 'logout'
+  map.friend_confirm 'friends/confirm/:id', :controller => 'friends', :action => 'confirm_invitation'
+  map.friend_reject 'friends/reject/:id', :controller => 'friends', :action => 'reject_invitation'
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.

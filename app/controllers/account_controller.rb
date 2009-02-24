@@ -1,9 +1,10 @@
 class AccountController < ApplicationController
   before_filter :login_required, :only => :dashboard
   def dashboard
-    puts root_path
     feeds_per_page = 10
     @current_user = current_user
+    @invitations_received = Invitation.find_all_by_to_id current_user.id
+    @invitations_sent = Invitation.find_all_by_from_id current_user.id
     @total_pages = (current_user.feeds.count.to_f / feeds_per_page).ceil
     @page = (params[:id] = params[:id].to_i) ? (params[:id] < 1 ? 1 : params[:id] > @total_pages ? @total_pages : params[:id]) : 1
     @feeds = Feed.find :all, :conditions => "account_id = " + current_user.id.to_s, :order => 'id DESC', :offset => (@page-1) * feeds_per_page, :limit => feeds_per_page

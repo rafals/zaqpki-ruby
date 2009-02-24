@@ -67,6 +67,25 @@
               <td align="right" style="font-size:20px;"><%= friend.saldo.round(2) %> zł</td>
             </tr>
           <% end -%>
+          <% @invitations_received.each do |invitation| -%>
+            <tr>
+              <td width="20px" style="font-size:20px;"><%= image_tag 'icons/clock.png' %></td>
+              <td style="font-size:20px;"><%= "#{invitation.from.name}" %></td>
+              <td align="right" style="font-size:20px;">
+                <%= link_to "#{image_tag 'icons/tick.png'}", friend_confirm_path(invitation) %>
+                <%= link_to "#{image_tag 'icons/cross.png'}", friend_reject_path(invitation) %>
+              </td>
+            </tr>
+          <% end -%>
+          <% @invitations_sent.each do |invitation| -%>
+            <tr>
+              <td width="20px" style="font-size:20px;"><%= image_tag 'icons/clock.png' %></td>
+              <td style="font-size:20px;"><%= "#{invitation.to.name}" %></td>
+              <td align="right" style="font-size:20px;">
+                <%= link_to "#{image_tag 'icons/cross.png'}", friend_reject_path(invitation) %>
+              </td>
+            </tr>
+          <% end -%>
         </table>
         <%= link_to "#{image_tag 'icons/plus.png'} Dodaj", 'javascript:show_new_friend()', :id => 'show_new_friend_link' %>
         <%= link_to "#{image_tag 'icons/newspaper.png'} Wróć", 'javascript:hide_new_friend()', :id => 'hide_new_friend_link', :style => 'display:none;' %>

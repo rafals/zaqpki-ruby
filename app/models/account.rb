@@ -60,7 +60,7 @@ class Account < ActiveRecord::Base
   end
   
   def connect account
-    if knows? account or account.id == id
+    if knows? account
       return false
     end
     me_new = Friend.create :owner => self, :account => account
