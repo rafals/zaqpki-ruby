@@ -56,7 +56,7 @@ class Account < ActiveRecord::Base
   end
   
   def knows? account
-    !!(friendship account)
+    account.id == self.id or !!(friendship account)
   end
   
   def connect account
@@ -95,11 +95,10 @@ class Account < ActiveRecord::Base
   def report description, cost, spongers_ids, sponsor_id
     sponsor_id ||= id
     spongers = modelize spongers_ids
+    spongers.each do |sponger|
+      return false unless sponger.knows? modelize sponsor_id
+    end
     Deal.create :sponsor_id => sponsor_id, :cost => cost, :description => description, :snitch_id => id, :spongers => spongers
-  end
-  
-  def buy description, cost, sponsor_id, spongers_ids
-    report description, cost, spongers_ids, sponsor_id
   end
   
   def self.authenticate email, password

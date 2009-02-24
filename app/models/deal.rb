@@ -10,8 +10,6 @@ class Deal < ActiveRecord::Base
   after_create :create_feeds, :create_transfers
   after_update :update_transfers
   
-  before_create :connect_transactors
-  
   def connect_transactors
     spongers.each do |sponger|
       sponger.connect sponsor
@@ -69,7 +67,7 @@ class Deal < ActiveRecord::Base
     end
   end
   
-  def disable_as disabler
+  def disable_by disabler
     if self.is_enabled == true
       destroy_transfers
       feeds.each do |feed|

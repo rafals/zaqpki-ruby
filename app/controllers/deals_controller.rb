@@ -6,7 +6,7 @@ class DealsController < ApplicationController
   end
   
   def remove
-    if Deal.find(params[:id]).disable_as current_user
+    if Deal.find(params[:id]).disable_by current_user
       flash[:notice] = "Wyjebka udana!^_^"
     else
       flash[:error] = "Nie udało się wyjebać deala"
