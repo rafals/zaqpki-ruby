@@ -5,8 +5,6 @@ require(File.join(File.dirname(__FILE__), 'config', 'boot'))
 
 require 'rake'
 
-task :default => :commit
-
 require 'rake/testtask'
 require 'rake/rdoctask'
 
