@@ -82,22 +82,21 @@ class Account < ActiveRecord::Base
   end
   
   def modelize ids
-    unless ids.is_a? Array
+    unless ids.respond_to?(:count)
       return Account.find ids
     end
     models = []
-    if ids and ids.length > 0
+    if ids and ids.count > 0
       models = ids.map { |id| Account.find id }
     end
     models
   end
   
-  def report description, cost, spongers_ids, sponsor_id = nil
+  def report description, cost, spongers_ids, sponsor_id
     sponsor_id ||= id
     spongers = modelize spongers_ids
-    spongers = [spongers] unless spongers.is_a? Array
     spongers.each do |sponger|
-      return false unless (sponger.knows? modelize sponsor_id)
+      return false unless sponger.knows? modelize sponsor_id
     end
     Deal.create :sponsor_id => sponsor_id, :cost => cost, :description => description, :snitch_id => id, :spongers => spongers
   end

@@ -4,7 +4,19 @@
 require(File.join(File.dirname(__FILE__), 'config', 'boot'))
 
 require 'rake'
+
 require 'rake/testtask'
 require 'rake/rdoctask'
 
 require 'tasks/rails'
+
+desc 'GitHub push'
+task :commit do
+  system "git add -A"
+  if ENV['m']
+    system "git commit -a -m '#{ENV['m']}'"
+  else
+    system 'git commit -a -m "`git status`"'
+  end
+  system "git push"
+end
