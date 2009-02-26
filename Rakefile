@@ -14,9 +14,9 @@ desc 'GitHub push'
 task :commit do
   system "git add -A"
   if ENV['m']
-    system "git commit -a -m '#{ENV['m']}'"
+    system "git commit -a -m \"#{ENV['m']}\""
   else
-    system 'git commit -a -m "`git status`"'
+    system "git commit -a -m \"`git status | grep modified | ruby line_reader.rb`\""
   end
-  system "git push"
+  system "push"
 end
