@@ -3,7 +3,6 @@ readlines.each do |line|
   begin
     action = line[/#[\t ]*([a-z ]*):[\t ]*(.*)/, 1].to_sym
     file_name = line[/#[\t ]*([a-z ]*):[\t ]*(.*)/, 2]
-    puts file_name
     files[action] ||= []
     files[action] << file_name
   rescue
