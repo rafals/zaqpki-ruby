@@ -16,10 +16,7 @@ task :commit do
   if ENV['m']
     system "git commit -a -m '#{ENV['m']}'"
   else
-    status = system "git status"
-    puts status
-    # tu możemy obrobić status
-    system "git commit -a -m '#{status}'"
+    system 'git commit -a -m "`git status`"'
   end
   system "git push"
 end
