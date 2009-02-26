@@ -16,7 +16,7 @@ task :commit do
   if ENV['m']
     system "git commit -a -m \"#{ENV['m']}\""
   else
-    system "git commit -a -m \"`git status | grep modified | ruby line_reader.rb`\""
+    system "git commit -a -m \"`git status | ruby git_reader.rb`\""
   end
-  system "push"
+  system "git push"
 end

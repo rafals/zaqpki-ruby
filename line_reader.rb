@@ -1,1 +1,0 @@
-puts "Modified: " + readlines.map { |line| line.slice(14, line.length).chomp }.join(", ")
