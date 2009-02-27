@@ -2,7 +2,7 @@ class DealsController < ApplicationController
   before_filter :login_required 
   
   def add
-    current_user.report params[:description], params[:cost], params[:spongers_ids].split(','), params[:sponsor_id]#.split(',')
+    current_user.report params[:description], params[:cost], params[:spongers_ids].split(','), params[:sponsor_id], params[:icon]
     flash[:notice] = "Zaqpiono " + params[:description]
     redirect_to '/'
   end

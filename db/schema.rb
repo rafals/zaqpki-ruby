@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20090224140146) do
     t.float    "cost"
     t.integer  "snitch_id"
     t.boolean  "is_enabled",  :default => true
+    t.integer  "icon"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

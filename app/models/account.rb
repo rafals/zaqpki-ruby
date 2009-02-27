@@ -92,13 +92,13 @@ class Account < ActiveRecord::Base
     models
   end
   
-  def report description, cost, spongers_ids, sponsor_id = nil
+  def report description, cost, spongers_ids, sponsor_id = nil, icon = 1
     sponsor_id ||= id
     spongers = modelize spongers_ids
     spongers.each do |sponger|
       return false unless sponger.knows? modelize sponsor_id
     end
-    Deal.create :sponsor_id => sponsor_id, :cost => cost, :description => description, :snitch_id => id, :spongers => spongers
+    Deal.create :sponsor_id => sponsor_id, :cost => cost, :description => description, :snitch_id => id, :spongers => spongers, :icon => icon
   end
   
   def self.authenticate email, password

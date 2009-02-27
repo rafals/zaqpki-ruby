@@ -1,0 +1,5 @@
+<% feeds.each do |feed| -%>
+  <div class="alert body" onmouseover="this.style.backgroundColor = '#FFFFBE'" onmouseout="this.style.backgroundColor = ''">
+    <%= render :partial => feed.type.to_s.underscore , :locals => {:feed => feed} %>
+  </div>
+<% end -%>

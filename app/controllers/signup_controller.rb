@@ -17,7 +17,7 @@ class SignupController < ApplicationController
       puts activation.inspect
       mail = Activator.create_signup_token(activation, host)
       Activator.deliver(mail)
-      flash[:notice] = "Ponownie wyslalismy ci email aktywacyjny"
+      flash[:notice] = '<a href="http://' + host + '/signup/verify/' + activation.token + '">finalizuj</a>'
     else
       flash[:error] = "Podano zly e-mail"
     end

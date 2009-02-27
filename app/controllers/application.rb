@@ -3,7 +3,7 @@
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
-  layout 'oldschool'
+  layout 'github'
   
   def current_user
     return nil unless session[:current_user]

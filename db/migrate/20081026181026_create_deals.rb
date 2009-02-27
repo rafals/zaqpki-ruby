@@ -6,6 +6,7 @@ class CreateDeals < ActiveRecord::Migration
       t.float :cost
       t.integer :snitch_id
       t.boolean :is_enabled, :default => true
+      t.integer :icon
       t.timestamps
     end
   end

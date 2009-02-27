@@ -13,6 +13,8 @@ function process_add_form(form){
       
       form['sponsor_id'].value = sponsor_id
       form['spongers_ids'].value = spongers_ids
+      src = $("chosen_icon").src
+      form['icon'].value = src.slice(src.lastIndexOf("/") + 1,-4)
       return true
     } else {
       return false
@@ -23,22 +25,24 @@ function process_add_form(form){
 }
 
 function show_new_deal(){
+    Effect.BlindUp('show_new_deal_link');
     Effect.BlindDown('new_deal');
-    Effect.BlindUp('dashboard');
+    Effect.BlindUp('news');
 }
 function hide_new_deal(){
+    Effect.BlindDown('show_new_deal_link');
     Effect.BlindUp('new_deal');
-    Effect.BlindDown('dashboard');
+    Effect.BlindDown('news');
 }
 function hide_new_friend(){
     $('show_new_friend_link').show()
     $('hide_new_friend_link').hide()
     Effect.BlindUp('new_friend');
-    Effect.BlindDown('feeds');
+    Effect.BlindDown('news');
 }
 function show_new_friend(){
     $('show_new_friend_link').hide()
     $('hide_new_friend_link').show()
     Effect.BlindDown('new_friend');
-    Effect.BlindUp('feeds');
+    Effect.BlindUp('news');
 }
