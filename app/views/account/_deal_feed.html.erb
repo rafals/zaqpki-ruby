@@ -8,7 +8,7 @@
       </td><td align="right">
 <%= "#{deal.created_at}" %>
 <%  if deal.is_enabled %>
-  <%= link_to image_tag('icons/cross.png'), :controller => 'deals', :action => 'remove', :id => deal.id%>
+  <%= link_to image_tag('/icons/cross.png'), :controller => 'deals', :action => 'remove', :id => deal.id%>
 <% end %>
     </td></tr>
     <tr><td colspan="2">
@@ -23,13 +23,59 @@
   </table>
 </div>-->
 
-<% deal = feed.deal; quantity = deal.spongers.count; -%>
-  
-  <div class="title" style="font-size:25px;"><%= deal.description %></div>
-  <div class="gravatar"><img src="/images/icons/<%= deal.icon.to_s %>.gif"/></div>
-  <div class="gravatar" style="font-family:verdana;font-size:12px;"><%= gravatar_for(deal.sponsor, :size => 50) + "<br/>" + deal.sponsor.name %> </div>
-  <span class="strzalka"><%= deal.cost %> zł</span>
-  <% deal.spongers.each do |sponger| -%>
-    <%= gravatar_for(sponger, :size => 50) %>
-  <% end -%>
-      
+<% deal = feed.deal; quantity = deal.spongers.count;  -%>
+<!--<div class="title" style="font-size:22px;"><%= deal.description.gsub(/[\s]/, "&nbsp;") %></div>-->
+<div style="margin: 0 0 0 20px;" onmouseover="$('deal_panel_<%= deal.id %>').show()" onmouseout="$('deal_panel_<%= deal.id %>').hide()">
+  <table width="100%">
+    <tr>
+      <td width="100" valign="top">
+        <%= "#{deal.sponsor.name}&nbsp;kupuje&nbsp;<b>#{deal.description.gsub(/\s/, "&nbsp;")}</b>&nbsp;za&nbsp;#{deal.cost}&nbsp;zl&nbsp;dla:&nbsp;" %>
+      </td>
+      <td width="*">
+        <%= deal.spongers.map{ |s| s.name}.join(', ') %>
+      </td>
+      <td align="right" width="150" valign="top">
+        <%= feed.created_at.strftime("%d.%m.%Y - %H:%M:%S") %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div style="float:none;display:block;">
+          
+          <table width="100%">
+            <tr>
+              <td rowspan="2" width="60" valign="middle"><%= gravatar_for(deal.sponsor, :size => 70)%></td>
+              <td align="center" width="10" height="1" valign="middle">
+                <img src="/images/icons/<%= deal.icon.to_s %>.gif"/><br/>
+                <span class="strzalka" style="float:bottom;" valign="top" height="*">
+                  <span><%= deal.cost %> zł</span>
+                </span>
+              </td>
+              <td rowspan="2" width="300" valign="middle">
+                <% l = deal.spongers.length; size = l == 4 ? 54 : l > 4 ? 40 : 77 %>
+                <% deal.spongers.each do |sponger| -%>
+                  <%= gravatar_for(sponger, :size => size) %>
+                <% end -%>
+              </td>
+              <td rowspan="2" width="*" valign="middle">
+                <div id="deal_panel_<%= deal.id %>" style="display:none">
+                  <%  if deal.is_enabled %>
+                    <%= link_to image_tag('icons/cross.png'), :controller => 'deals', :action => 'remove', :id => deal.id%>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                
+              </td>
+            </tr>
+          </table>
+          
+          
+          
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

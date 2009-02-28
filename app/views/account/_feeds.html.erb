@@ -1,5 +1,19 @@
-<% feeds.each do |feed| -%>
-  <div class="alert body" onmouseover="this.style.backgroundColor = '#FFFFBE'" onmouseout="this.style.backgroundColor = ''">
+<h1 class="date_header">
+<% if feeds.length > 0 -%>
+  <h1 class="date_header"><%= latest = feeds[0].created_at.strftime("%d.%m.%Y") %></h1>
+<% end; gray = false;  feeds.each do |feed| -%>
+  <% if (current = feed.created_at.strftime("%d.%m.%Y")) != latest; latest = current %>
+    <h1 class="date_header"><%= current %></h1>
+  <% end %>
+  <div class="alert body<%= (gray = !gray) ? " gray" : "" %>" onmouseover="this.style.backgroundColor = '#FFFFBE'" onmouseout="this.style.backgroundColor = ''">
     <%= render :partial => feed.type.to_s.underscore , :locals => {:feed => feed} %>
   </div>
 <% end -%>
+<% if total_pages > 1 %>
+  <% if page > 1 %>
+    <%= link_to 'nowsze', page_path(@page - 1) %>
+  <% end %>
+  <% if page < total_pages %>
+    <%= link_to 'starsze', page_path(@page + 1) %>
+  <% end %>
+<% end %>

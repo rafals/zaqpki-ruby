@@ -1,22 +1,22 @@
 <style type="text/css">
-
-#icon_box {
+  
+  #icon_box {
   position:absolute;
   left:100px;
   top:100px;
   display:none;
   padding: 15px;
-}
-
-.icon {
+  }
+  
+  .icon {
   background-color: #FFFFFF;
-}
-
-.icon img {
+  }
+  
+  .icon img {
   width:25px;
   height:25px;
-}
-
+  }
+  
 </style>
 <script type="text/javascript">
 var Observator = Class.create({
@@ -28,6 +28,13 @@ var Observator = Class.create({
     })
   }
 })
+
+function mousePosition(event){
+   return {
+     x: event.clientX ? event.clientX + document.body.scrollLeft : event.pageX,
+     y: event.clientY ? event.clientY + document.body.scrollTop : event.pageY
+   }
+}
 
 var IconBox = Class.create({
   initialize: function(box_id, chosen_id, imageslist){
@@ -48,11 +55,15 @@ var IconBox = Class.create({
     buffer += "</table>"
     this.box.innerHTML = buffer;
     
+    this.box.setStyle({
+      left: '100px',
+      top: '100px'
+    })
     
     this.hide()
     var context = this
     new Observator('#'+this.chosen.id, {
-      click : function(event){
+      mouseover : function(event){
         context.box.style.display == 'none' ? context.show() : context.hide()
       }
     })
@@ -94,29 +105,28 @@ var IconBox = Class.create({
 Event.observe(window, "load", function(){
   var icons = new Array()
   for(var i = 1; i <= 100; i++){
-    icons.push('images/icons/' + i + '.gif')
+    icons.push('/images/icons/' + i + '.gif')
   }
   new IconBox("icon_box", "chosen_icon", icons)
 })
 </script>
-  <form method="POST" action="/deals/add" onsubmit="return process_add_form(this)">
-        <img id="chosen_icon" src="images/icons/1.gif"/>
-        <div id="icon_box"></div>
-        <input type="hidden" name="sponsor_id"/>
-        <input type="hidden" name="spongers_ids"/>
-        <input type="hidden" name="icon" value="1" />
-        <input name="description" id="description" class="text_field huge" style="width:250px;font-size:30px;" type="text" value="Nowy zaqpek"/>
-        <span class="zaqp" style="margin: 30px 10px 3px 10px; display: inline;">za</span>
-        <input name="cost" class="text_field huge" style="width:75px;font-size:30px;display:inline;" type="text">
-        <span class="zaqp" style="margin: 30px 10px 3px 10px; display: inline;">zł</span><br/><br/>
-        <span>
-          <span style="margin: 30px 10px 3px 10px; display: inline;">kto</span>
-          <input type="text" id="sponsor"/>
-        </span>
-        <span>
-          <span style="margin: 30px 10px 3px 10px; display: inline;">komu</span>
-          <input type="text" id="spongers"/>
-        </span><br />  
-    <input value="Dodaj" style="margin-top: 10px" class="big_button" class="text_field huge" type="submit"/>
-  </form>
-  <input value="Wróć" class="big_button" class="text_field huge" style="background-color:#BBBBBB;" type="submit" onclick="hide_new_deal()"/>
+<form method="POST" action="/deals/add" onsubmit="return process_add_form(this)">
+  <img id="chosen_icon" src="/images/icons/1.gif"/>
+  <div id="icon_box"></div>
+  <input type="hidden" name="sponsor_id"/>
+  <input type="hidden" name="spongers_ids"/>
+  <input type="hidden" name="icon" value="1" />
+  <input name="description" id="description" class="text" style="width:250px;font-size:30px;" type="text" value="Opis zaqpka" onfocus="if(this.value=='Opis zaqpka')this.value=''"/>
+  <span class="zaqp" style="margin: 30px 10px 3px 10px; display: inline;">za</span>
+  <input name="cost" class="text_field huge" style="width:75px;font-size:30px;display:inline;" type="text">
+  <span class="zaqp" style="margin: 30px 10px 3px 10px; display: inline;">zł</span><br/><br/>
+  <span>
+    <span style="margin: 30px 10px 3px 10px; display: inline;">kto</span>
+    <input type="text" id="sponsor"/>
+  </span>
+  <span>
+    <span style="margin: 30px 10px 3px 10px; display: inline;">komu</span>
+    <input type="text" id="spongers"/>
+  </span><br />  
+  <input value="Dodaj" style="margin-top: 10px" class="big_button" class="text_field huge" type="submit" id="deal_submit"/>
+</form>

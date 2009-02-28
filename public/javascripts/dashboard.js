@@ -23,26 +23,3 @@ function process_add_form(form){
     alert(e)
   }
 }
-
-function show_new_deal(){
-    Effect.BlindUp('show_new_deal_link');
-    Effect.BlindDown('new_deal');
-    Effect.BlindUp('news');
-}
-function hide_new_deal(){
-    Effect.BlindDown('show_new_deal_link');
-    Effect.BlindUp('new_deal');
-    Effect.BlindDown('news');
-}
-function hide_new_friend(){
-    $('show_new_friend_link').show()
-    $('hide_new_friend_link').hide()
-    Effect.BlindUp('new_friend');
-    Effect.BlindDown('news');
-}
-function show_new_friend(){
-    $('show_new_friend_link').hide()
-    $('hide_new_friend_link').show()
-    Effect.BlindDown('new_friend');
-    Effect.BlindUp('news');
-}

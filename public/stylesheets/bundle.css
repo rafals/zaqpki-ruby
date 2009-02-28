@@ -1,4 +1,8 @@
-span.strzalka{margin: 13px 10px 0 0; float: left; background-color:#11BB00; border: 2px darkgreen solid;padding: 2px 10px 2px 10px; font-weight: bold;}
+span.strzalka {float: left; background-image:url(/images/arrow.png); height:17px; width:80px; text-align:center;p }
+span.disabled {background-image:url(/images/arrow_disabled.png);}
+span.strzalka span{margin-top: -4px; width:100%;margin-right:3px;font-weight: bold;font-family:helvetica;font-size:12px;}
+.gray {background-color:#F8F8F8;}
+.site_links a{font-size:15px;}
 #flash{z-index:1000;position:absolute;top:0;left:0;width:100%}
 #flash_error{ background-color:#880000;color:#FF7777;margin:0 auto 0 auto;width:300px;}
 #flash_notice{background-color:#008800;color:#77FF77;margin-left:auto;margin-right: auto;width:300px;}
@@ -159,10 +163,10 @@ body{text-align:center;}
 #header.basic{border-bottom:5px solid #ddd;margin-bottom:1em;}
 #header .userbox{background:#EAF2F5;border:1px solid #ddd;float:right;margin-top:1.6em;width:25em;color:#aac;}
 #header .userbox .box{margin:.25em .5em;}
-#header .userbox .gravatar{float:left;}
+#header .userbox .gravatar{float:left; padding:2px; border: #BBB 1px solid;}
 #header .userbox .gravatar img{border:1px solid #d0d0d0;padding:2px;background-color:white;margin-right:.7em;}
 #header .userbox .top{overflow:hidden;}
-#header .userbox .top .name{float:left;overflow:hidden;font-weight:bold;width:10em;}
+#header .userbox .top .name{float:left;overflow:hidden;color:#000;font-weight:bold;width:120px;height:50px;padding:5px 0 0 15px;font-size: 17px;valign:bottom;}
 #header .userbox .top .name a{color:#000;}
 #header .userbox .top .links{font-size:85%;margin-top:.2em;float:right;text-align:right;}
 #header .userbox .top .links a{color:#4183c4;}
@@ -513,7 +517,7 @@ body:first-of-type #header .topsearch input[type=submit]{top:0;}
 .news h1{margin-bottom:0;}
 .filter,.feed_filter{border-bottom:1px solid #AAA;padding-bottom:.25em;margin-bottom:1em;}
 .filter li,.feed_filter li{clear:none;display:inline;}
-#dashboard .news .alert{padding:10px 0 10px 0em;overflow:hidden;border-top:1px solid #ccc;}
+#dashboard .news .alert{padding:5px 0 5px 0;margin-left:10px;overflow:hidden;border-top:1px solid #ccc;}
 #dashboard .news .alert .body{overflow:hidden;padding:0 0 1em 0;}
 #dashboard .news .alert .title{padding:0 0 .25em 0;font-weight:bold;}
 #dashboard .news .alert .title span{background-color:#fff6a9;}

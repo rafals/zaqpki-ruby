@@ -18,6 +18,7 @@ if(window.Prototype == undefined){
       this.tokens = $A(tokens).sort()
       this.sectionId = sectionId
       this.multipleMode = (options && options.multiple != undefined) ? options.multiple : false
+      this.onChosen = (options && options.onChosen ? options.onChosen : function(){})
       this.createNodes()
       if(!Prototype.Browser.IE){
         this.input.observe('keydown', function(event){setTimeout(function(){context.apply(event);}, 10)})
@@ -178,6 +179,9 @@ if(window.Prototype == undefined){
       })
       if(!this.multipleMode || this.tokens.length == 0)
         this.input.style.display = 'none';
+      else
+        this.input.focus()
+      this.onChosen()
     },
 
     cancelChoice: function(choiceSpan){
