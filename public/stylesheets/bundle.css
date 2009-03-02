@@ -1,5 +1,5 @@
-span.strzalka {float: left; background-image:url(/images/arrow.png); height:17px; width:80px; text-align:center;p }
-span.disabled {background-image:url(/images/arrow_disabled.png);}
+span.strzalka, span.strzalka_disabled {float: left; background-image:url(/images/arrow.png); height:17px; width:80px; text-align:center;p }
+span.strzalka_disabled {background-image:url(/images/arrow_disabled.png);}
 span.strzalka span{margin-top: -4px; width:100%;margin-right:3px;font-weight: bold;font-family:helvetica;font-size:12px;}
 .gray {background-color:#F8F8F8;}
 .site_links a{font-size:15px;}

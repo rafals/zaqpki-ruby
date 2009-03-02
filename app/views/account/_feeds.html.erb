@@ -1,19 +1,64 @@
-<h1 class="date_header">
 <% if feeds.length > 0 -%>
   <h1 class="date_header"><%= latest = feeds[0].created_at.strftime("%d.%m.%Y") %></h1>
 <% end; gray = false;  feeds.each do |feed| -%>
   <% if (current = feed.created_at.strftime("%d.%m.%Y")) != latest; latest = current %>
     <h1 class="date_header"><%= current %></h1>
   <% end %>
-  <div class="alert body<%= (gray = !gray) ? " gray" : "" %>" onmouseover="this.style.backgroundColor = '#FFFFBE'" onmouseout="this.style.backgroundColor = ''">
+  <div class="alert body<%= (gray = !gray) ? " gray" : "" %>" style="padding:0;" onmouseover="this.style.backgroundColor = '#FFFFBE'" onmouseout="this.style.backgroundColor = ''">
     <%= render :partial => feed.type.to_s.underscore , :locals => {:feed => feed} %>
   </div>
 <% end -%>
 <% if total_pages > 1 %>
-  <% if page > 1 %>
-    <%= link_to 'nowsze', page_path(@page - 1) %>
-  <% end %>
-  <% if page < total_pages %>
-    <%= link_to 'starsze', page_path(@page + 1) %>
-  <% end %>
+  <div class="pagination">
+    <table width="100%">
+      <tr>
+        <td align="center" width="*">
+          <span id="pagination_navi">
+            <% if page > 1 %>
+              <%= link_to 'nowsze', page_path(@page - 1) %>
+            <% else %>
+              <span class="disabled">nowsze</span>
+            <% end %>
+            <% if page < total_pages %>
+              <%= link_to 'starsze', page_path(@page + 1) %>
+            <% else %>
+              <span class="disabled">starsze</span>
+            <% end %>
+          </span>
+          <span id="pagination_goto" style="display:none;">
+            <% 1.upto(total_pages) do |num| -%>
+              <% if num == page %>
+                <span class="disabled"><%= num %></span>
+              <% else %>
+                <%= link_to num, page_path(num) %>
+              <% end %>
+            <% end %>
+          </span>
+        
+        </td>
+        <td valign="top" width="100">
+          <script type="text/javascript">
+          window.pagination_opened = false
+      
+          function switch_pagination(){
+            if(window.pagination_opened){
+              $("pagination_goto").hide()
+              $("pagination_navi").show()
+              $('pagination_switch').innerHTML = "skocz do"
+            }
+            else {
+              $("pagination_goto").show()
+              $("pagination_navi").hide()
+              $('pagination_switch').innerHTML = "nawigator"
+            }
+            window.pagination_opened = !window.pagination_opened
+          }
+          </script>
+          <%= link_to 'przejdz do', 'javascript:switch_pagination()', :id => 'pagination_switch' %>        
+        </td>
+      </tr>
+    </table>
+  </div>
+
+
 <% end %>

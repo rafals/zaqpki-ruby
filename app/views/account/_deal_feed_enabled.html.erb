@@ -1,0 +1,46 @@
+<div onmouseover="$('deal_additional_info_<%= deal.id %>').show()" onmouseout="$('deal_additional_info_<%= deal.id %>').hide()">
+<table width="100%">
+  <tr>
+    <td width="100" valign="top">
+      <%= "#{deal.sponsor.name}&nbsp;kupuje&nbsp;<b>#{deal.description.gsub(/\s/, "&nbsp;")}</b>&nbsp;za&nbsp;#{deal.cost}&nbsp;zl&nbsp;dla:&nbsp;" %>
+    </td>
+    <td width="*">
+      <%= deal.spongers.map{ |s| s.name}.join(', ') %>
+    </td>
+    <td align="right" width="150" valign="top">
+      <%= deal.created_at.strftime("%d.%m.%Y - %H:%M:%S") %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div style="float:none;display:block;">
+        
+        <table width="100%">
+          <tr>
+            <td width="60" valign="middle"><%= gravatar_for(deal.sponsor, :size => 70)%></td>
+            <td align="center" width="10" height="1" valign="middle">
+              <img src="/images/icons/<%= deal.icon.to_s %>.gif"/><br/>
+              <span class="strzalka" style="float:bottom;" valign="top" height="*">
+                <span><%= deal.cost %> zł</span>
+              </span>
+            </td>
+            <td width="300" valign="middle">
+              <% l = deal.spongers.length; size = l == 4 ? 54 : l > 4 ? 40 : 77 %>
+              <% deal.spongers.each do |sponger| -%>
+                <%= gravatar_for(sponger, :size => size) %>
+              <% end -%>
+            </td>
+            <td width="*" align="right" valign="top">
+              <div id="deal_additional_info_<%= deal.id %>" style="display:none;text-align:right;padding:0 10px 0 0;">
+                <%  if deal.is_enabled %>
+                  <%= link_to image_tag('icons/cross.png'), :controller => 'deals', :action => 'remove', :id => deal.id%>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </td>
+  </tr>
+</table>
+</div>

@@ -1,5 +1,6 @@
 class AccountController < ApplicationController
   before_filter :login_required, :only => :dashboard
+  
   def dashboard
     feeds_per_page = 10
     @current_user = current_user
