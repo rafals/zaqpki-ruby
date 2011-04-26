@@ -40,7 +40,7 @@ class SignupController < ApplicationController
   def create_account
     unless params[:password] == params[:confirmation_password]
       flash[:error] = "Podane hasla nie sa identyczne!"
-      redirect_to signup_details_path
+      return redirect_to signup_details_path
     end
     account = Account.new :email => session[:verified_email], :password => params[:password], :name => params[:name]
     if account.save
